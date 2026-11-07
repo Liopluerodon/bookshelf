@@ -129,46 +129,6 @@
       position: absolute;
     }
 
-    #boxshelf{
-      width: 60%;
-      position: absolute;
-      height: 500px;
-      box-shadow: 0px -50px rgb(114, 87, 69);
-      border: 5px solid rgb(44, 17, 9);
-      background-color: rgb(84, 57, 39);
-      border-radius: 15px;
-    }
-
-    #stackedBooks {
-      width: 50%;
-      position: absolute;
-    }
-
-    .extraBook{
-      position: absolute;
-      height: 20px;
-      border-radius: 0px 2px 2px 0px;
-      text-align: center;
-      color: var(--titlecolor, black);
-    }
-
-    /* Paper part */
-    .extraBook::after {
-      content: "";
-      position: absolute;
-      left: -10px; /* how far the pages stick out */
-      top: 0;
-      width: 10px; /* thickness of paper part */
-      height: 100%;
-      background: linear-gradient(
-        var(--paper-dark, #cfc2a8),
-        #f8f1e0 10%,
-        #f8f1e0 90%,
-        var(--paper-dark, #cfc2a8)
-      );
-      box-shadow: inset -1px 0 2px rgba(0,0,0,0.2); /* shadow near spine */
-    }
-
   </style>
 </head>
 <body>
@@ -218,9 +178,6 @@
     <div id="books"></div>
 
     <div id="floor"></div>
-    <div id="boxshelf"></div>
-    <div id="stackedBooks">
-    </div>
 <script>
 
   bookShelf = document.getElementById("books");
