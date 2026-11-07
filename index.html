@@ -101,14 +101,12 @@
     if (bookCovers[i]!="") {
       let name = document.createElement("p");
       name.className = "plaque";
-      if (i<inProgressShelves*shelfSize) {
-        name.className = "plaque inProgress";
-      }
       name.style.top = (Math.floor(i/shelfSize)*heightGap+initHeight+coverHeight+shelfThickness-5) - 5 +"px";
       name.style.left = (i%shelfSize*widthGap+initWidth)+"%";
       name.textContent = bookTitles[i]
       document.body.appendChild(name)
     }
+  }
   }
 </script>
 
