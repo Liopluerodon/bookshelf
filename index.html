@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Library</title>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+
+  <style>
+          /* Reset + Font */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+     body::-webkit-scrollbar {display: none;}
+
+      :root {
+        --book-height: 140px;
+      }
+
+      /* Shelf Styling */
+      .shelf {
+        width: 100%;
+        height: 20px;
+        background: linear-gradient(to bottom, #8b5e3c, #5a3e2b);
+        margin: 0;
+        border-radius: 8px;
+        box-shadow: 
+          inset 0 4px 8px rgba(0, 0, 0, 0.3),
+          0 6px 10px rgba(0, 0, 0, 0.2);
+        position: absolute;
+      }
+
+      /* Shelf Lip (adds realism) */
+      .shelf::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 12px;
+        background: #3b261a;
+        border-radius: 0 0 8px 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      .wip {
+        background: linear-gradient(to bottom, gold, gold);
+        box-shadow: 
+          inset 0 4px 8px rgba(255,255, 255, 0.8),
+          0 6px 10px rgba(255, 255, 255, 0.5);
+      }
+
+      .wip::after {
+        background: darkgoldenrod;
+      }
+  
+    .book{
+      --spine-width: 10px;
+      position: absolute;
+      height: var(--book-height);
+      width: 101.25px;
+      isolation: isolate;
+      background-color: #49372c;
+      /* Stretch the whole image across the front cover, beside the spine. */
+      background-size: calc(100% - var(--spine-width)) 100%;
+      background-position: right center;
+      background-repeat: no-repeat;
+      border-radius: 9px 3px 3px 9px;
+      box-shadow:
+        0 2px 0 #49372c,
+        4px 7px 10px rgba(34, 20, 12, 0.35);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform-origin: center bottom;
+    }
+
+    .book:hover,
+    a:focus-visible .book {
+      z-index: 1;
+      transform: scale(1.1);
+      box-shadow:
+        0 2px 0 #49372c,
+        6px 10px 14px rgba(34, 20, 12, 0.4);
+    }
+
+    a:focus-visible .book {
+      outline: 2px solid #f6efdc;
+      outline-offset: 5px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .book {
+        transition: none;
+      }
+    }
+
+    .plaque{
+      position: absolute;
+      width: 132px;
+      height: 9px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 5px;
+      transition: transform 0.3s ease;
+      background-color: gold;
+      border-radius: 2px;
+      text-align: center;
+      color: rgb(50, 50, 0);
+      font-size: 8px;
+      box-shadow: 
+          inset 0 2px 3px rgba(255,255, 255, 0.4),
+          0 3px 5px rgba(255, 255, 255, 0.2);
+    }
+
+    .inProgress{
+      background-color: rgb(50, 220, 220);
+      color: rgb(0, 50, 50);
+    }
+
+        /* Bottom Box */
+    #floor {
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(to bottom, rgb(150, 114, 99), rgb(114, 87, 69));
+      border-top: 5px solid rgb(84, 57, 39);
+      position: absolute;
+    }
+
+    #boxshelf{
+      width: 60%;
+      position: absolute;
+      height: 500px;
+      box-shadow: 0px -50px rgb(114, 87, 69);
+      border: 5px solid rgb(44, 17, 9);
+      background-color: rgb(84, 57, 39);
+      border-radius: 15px;
+    }
+
+    #stackedBooks {
+      width: 50%;
+      position: absolute;
+    }
+
+    .extraBook{
+      position: absolute;
+      height: 20px;
+      border-radius: 0px 2px 2px 0px;
+      text-align: center;
+      color: var(--titlecolor, black);
+    }
+
+    /* Paper part */
+    .extraBook::after {
+      content: "";
+      position: absolute;
+      left: -10px; /* how far the pages stick out */
+      top: 0;
+      width: 10px; /* thickness of paper part */
+      height: 100%;
+      background: linear-gradient(
+        var(--paper-dark, #cfc2a8),
+        #f8f1e0 10%,
+        #f8f1e0 90%,
+        var(--paper-dark, #cfc2a8)
+      );
+      box-shadow: inset -1px 0 2px rgba(0,0,0,0.2); /* shadow near spine */
+    }
+
+  </style>
+</head>
+<body>
+      <div class="bookshelf-container">
+        <h1 class="title">The Library</h1>
+      </div>
+    <div class="fireflies">
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+    </div>
+    <div class="dust-layer">
+      <div class="dust"></div>
+      <div class="dust"></div>
+      <div class="dust"></div>
+      <div class="dust"></div>
+      <div class="dust"></div>
+      <div class="dust"></div>
+      <div class="dust"></div>
+      <div class="dust"></div>
+      <div class="dust"></div>
+      <div class="dust"></div>
+    </div>
+
+    <div>
+    <div class="vine"></div>
+    <div class="vine"></div>
+    <div class="vine"></div>
+    <div class="vine"></div>
+    <div class="vine"></div>
+    <div class="vine"></div>
+    <div class="vine"></div>
+    <div class="vine"></div>
+  </div>
+
+    <div class="godray-layer">
+      <div class="godray"></div>
+      <div class="godray"></div>
+      <div class="godray"></div>
+    </div>
+
+
+    <div id="books"></div>
+
+    <div id="floor"></div>
+    <div id="boxshelf"></div>
+    <div id="stackedBooks">
+    </div>
+<script>
+
+  bookShelf = document.getElementById("books");
+  bookTitles = [];
+  bookLinks = [];
+
+  bookCovers = [];
+  shelfSize = 6;
+  heightGap = 200;
+  initHeight = 180;
+  widthGap = 10.5;
+  initWidth = 19;
+
+  const shelfCount = Math.ceil(bookTitles.length / shelfSize);
+  const shelfContainer = document.querySelector(".bookshelf-container");
+  const coverHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--book-height"));
+  const shelfContainerTop = shelfContainer.getBoundingClientRect().top + window.scrollY;
+
+  for (let i = 0; i < shelfCount; i++) {
+    const shelf = document.createElement("div");
+    shelf.className = "shelf";
+    shelf.style.top = (i * heightGap + initHeight + coverHeight - shelfContainerTop) - 5 + "px";
+    shelfContainer.appendChild(shelf);
+  }
+
+  const shelfThickness = shelfContainer.querySelector(".shelf")?.offsetHeight || 0;
+  if (shelfCount > 0) {
+    shelfContainer.style.minHeight = ((shelfCount - 1) * heightGap + initHeight + coverHeight + shelfThickness - shelfContainerTop) + "px";
+  }
+
+  for (let i = 0; i<bookTitles.length; i++) {
+  if (bookTitles[i] != "") {
+    let book = document.createElement("div");
+    let link = document.createElement("a");
+    link.href = bookLinks[i];
+    book.className = "book";
+    book.style.top = (Math.floor(i/shelfSize)*heightGap+initHeight)+"px";
+    book.style.left = (i%shelfSize*widthGap+initWidth) + 1 +"%";
+    const coverUrl = 'covers/new/' + bookCovers[i] + '.png';
+    book.style.backgroundImage = 'url("' + coverUrl + '")';
+    const fallbackSpineColor = "#49372c";
+    book.style.setProperty("--spine-color", fallbackSpineColor);
+    bookShelf.appendChild(link);
+    link.appendChild(book);
+
+    if (bookCovers[i]!="") {
+      let name = document.createElement("p");
+      name.className = "plaque";
+      if (i<inProgressShelves*shelfSize) {
+        name.className = "plaque inProgress";
+      }
+      name.style.top = (Math.floor(i/shelfSize)*heightGap+initHeight+coverHeight+shelfThickness-5) - 5 +"px";
+      name.style.left = (i%shelfSize*widthGap+initWidth)+"%";
+      name.textContent = bookTitles[i]
+      document.body.appendChild(name)
+    }
+  }
+</script>
+
+</body>
+</html>
